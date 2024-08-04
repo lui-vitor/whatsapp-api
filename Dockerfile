@@ -2,7 +2,7 @@
 FROM node:20-alpine
 
 # Set the working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install Chromium
 ENV CHROME_BIN="/usr/bin/chromium-browser" \
