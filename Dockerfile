@@ -17,7 +17,7 @@ RUN set -x \
 ENV CHROME_BIN="/usr/bin/chromium-browser" \
     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true" \
     NODE_ENV="production" \
-    CHROME_USER_DATA_DIR="/tmp/chromium"
+    CHROME_USER_DATA_DIR="/sessions/chromium"
 
 RUN set -x \
     && apk update \
