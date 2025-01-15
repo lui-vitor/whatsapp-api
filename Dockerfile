@@ -35,14 +35,6 @@ FROM node:11-slim
 
 LABEL maintainer="Eric Bidelman <ebidel@>"
 
-# Run this like so:
-# docker run -i --rm --cap-add=SYS_ADMIN \
-#   --name puppeteer-chrome puppeteer-chrome-linux \
-#    node -e "`cat yourscript.js`"
-#
-# or run `yarn serve` to start the webservice version.
-#
-
 # # Manually install missing shared libs for Chromium.
 RUN apt-get update && \
 apt-get install -yq gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 \
@@ -72,9 +64,9 @@ RUN apt-get update && apt-get install -y wget --no-install-recommends \
 ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_1.2.1_amd64 /usr/local/bin/dumb-init
 RUN chmod +x /usr/local/bin/dumb-init
 
-COPY . /app/
-#COPY local.conf /etc/fonts/local.conf
-WORKDIR app
+WORKDIR /app
+
+COPY . .
 
 # Install deps for server.
 RUN yarn
