@@ -5,9 +5,6 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Install Chromium
-ENV CHROME_BIN="/usr/bin/chromium-browser" \
-    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true" \
-    NODE_ENV="production"
 RUN set -x \
     && apk update \
     && apk upgrade \
@@ -15,6 +12,22 @@ RUN set -x \
     udev \
     ttf-freefont \
     chromium
+
+# Install Chromium
+ENV CHROME_BIN="/usr/bin/chromium-browser" \
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true" \
+    NODE_ENV="production" \
+    CHROME_USER_DATA_DIR="/tmp/chromium"
+
+RUN set -x \
+    && apk update \
+    && apk upgrade \
+    && apk add --no-cache \
+    udev \
+    ttf-freefont \
+    chromium
+
+RUN mkdir -p $CHROME_USER_DATA_DIR && chmod -R 777 $CHROME_USER_DATA_DIR
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
