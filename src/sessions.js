@@ -85,9 +85,7 @@ const restoreSessions = () => {
 
 // Setup Session
 const setupSession = (sessionId) => {
-  try {
-    console.log('ENV', process.env);
-    
+  try {    
     if (sessions.has(sessionId)) {
       return { success: false, message: `Session already exists for: ${sessionId}`, client: sessions.get(sessionId) }
     }
