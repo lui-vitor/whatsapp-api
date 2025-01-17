@@ -7,8 +7,7 @@ WORKDIR /app
 # Install Chromium and dependencies
 ENV CHROME_BIN="/usr/bin/chromium-browser" \
     PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="true" \
-    NODE_ENV="production" \
-    CHROME_USER_DATA_DIR="/app/sessions/chromium"
+    NODE_ENV="production"
 
 RUN set -x \
     && apk update \
@@ -16,9 +15,7 @@ RUN set -x \
     && apk add --no-cache \
     udev \
     ttf-freefont \
-    chromium \
-    && mkdir -p $CHROME_USER_DATA_DIR \
-    && chmod -R 777 $CHROME_USER_DATA_DIR
+    chromium
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
